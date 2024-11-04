@@ -71,7 +71,7 @@ local function init()
     local exit = false
 
     while exit ~= 'y' do
-        print('Enter path of csv file')
+        print("Enter path of csv file. Don't include the extension")
         io.write("> ")
         csv_path = io.read() .. '.csv'
 
