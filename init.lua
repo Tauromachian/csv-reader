@@ -41,8 +41,6 @@ end
 
 local function httpPost(url, postData)
     local body = {}
-    print(url)
-
 
     local res, code = http.request {
         method = "POST",
