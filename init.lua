@@ -13,8 +13,8 @@ local function parse_csv_line(line)
         city = fields[2] or "",
         name = fields[3] or "",
         code = fields[4] or "",
-        county = fields[5] or "",
-        country = fields[6] or ""
+        subRegion = fields[5] or "",
+        region = fields[6] or ""
     }
 end
 
