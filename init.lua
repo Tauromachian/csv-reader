@@ -1,6 +1,7 @@
 local http = require("socket.http")
 local json = require("json")
 local ltn12 = require("ltn12")
+local cli = require("cliargs")
 
 local function parse_csv_line(line)
     local fields = {}
@@ -63,29 +64,21 @@ local function httpPost(url, postData)
     end
 end
 
-local function init()
-    local csv_path = ''
-    local url = ''
-    local exit = false
 
-    while exit ~= 'y' do
-        print("Enter path of csv file. Don't include the extension")
-        io.write("> ")
-        csv_path = io.read() .. '.csv'
+cli:set_name("csv-reader")
 
+cli:argument("url", "url of api")
+cli:argument("csv_path", "path of csv file")
 
-        print('Enter url of api')
-        io.write("> ")
-        url = io.read()
+local args, err = cli:parse()
 
-        local csv_data = read_csv(csv_path)
-        httpPost(url, csv_data)
-
-
-        print('Exit? Type "y" to exit')
-        io.write("> ")
-        exit = io.read()
-    end
+if not args and err then
+    print(err)
+    os.exit(1)
 end
 
-init()
+local url = args['url']
+local csv_path = args['csv_path'] .. '.csv'
+
+local csv_data = read_csv(csv_path)
+httpPost(url, csv_data)
