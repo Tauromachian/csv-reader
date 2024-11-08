@@ -12,7 +12,7 @@ local function parse_csv_line(line)
     return {
         zipCode = fields[1] or "",
         city = fields[2] or "",
-        stateName = fields[3] or "",
+        regionName = fields[3] or "",
         regionCode = fields[4] or "",
         subRegion = fields[5] or "",
         countryCode = fields[6] or ""
